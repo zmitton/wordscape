@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<body>
-
-<h2>WORDSCAPE SOLVER</h2>
-
-
-<input id="letters"></input>
-<button onclick="find()">Find</button>
-<p id="words" style="text-transform:lowercase;"></p>
-
-<script>
-  var wordlist = ["A",
+var wordlist = ["A",
 "a",
 "aa",
 "aal",
@@ -235898,60 +235884,3 @@
 "zythum",
 "Zyzomys",
 "Zyzzogeton"]
-
-  wordset = new Set()
-  wordlist.forEach((word)=>{wordset.add(word)})
-
-  function get(_letters){
-    if(_letters.length == 1){ return _letters}
-    var combos = []
-  // console.log("_letters.length", _letters.length)
-    for (var i = 0; i < _letters.length; i++) {
-      var letters = _letters.slice()
-      var firstChar = letters.splice(i,1)
-      // console.log("firstChar", firstChar)
-      var suffexCombos = get(letters)
-      // console.log("suffexCombos", suffexCombos)
-
-      for (var j = 0; j < suffexCombos.length; j++) {
-        // console.log("combos", suffexCombos)
-        // suffexCombos[j] = firstChar + suffexCombos[j]
-        combos.push( firstChar + suffexCombos[j])
-      }
-      combos.push(...suffexCombos)
-    }
-    // console.log("finalcombosL:::::::", suffexCombos)
-    return combos.slice().filter(onlyUnique)
-  }
-
-  function onlyUnique(value, index, self) { 
-      return self.indexOf(value) === index;
-  }
-
-  function isWord(_word){
-    return wordset.has(_word)
-    // return wordlist.indexOf(_word) != -1
-  }
-
-
-  function solve(blob){
-    return get((blob).split('')).filter(isWord).sort((a,b)=>{return a.length < b.length ? -1:1}).sort((c,d)=>{return c < d && c.length == d.length ? -1: 0})
-  }
-
-  function find(){
-    var letters = document.getElementById("letters").value.toLowerCase()
-    if(letters.length > 7){
-      alert("7 letters maximum")
-      letters = ""
-    }
-    var words = solve(letters)
-    var text = ""
-    words.forEach((word)=>{return text += word + " "})
-    // console.log(words)
-    document.getElementById("words").innerHTML = text
-  }
-
-</script> 
-
-</body>
-</html>

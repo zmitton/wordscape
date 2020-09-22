@@ -1,4 +1,4 @@
-wordlist = ["the",
+var wordlist = ["the",
 "of",
 "and",
 "to",
