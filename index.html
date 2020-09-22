@@ -10053,7 +10053,7 @@ var wordlist = ["the",
 
   function find(){
     // console.log("Here")
-    var letters = document.getElementById("letters").value
+    var letters = document.getElementById("letters").value.toLowerCase()
     var words = solve(letters)
     var text = ""
     words.forEach((word)=>{return text += word + " "})
